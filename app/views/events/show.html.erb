@@ -1,0 +1,21 @@
+<section class="single-blog">
+	<h2 class="blog-headline">ライブ詳細</h2>
+	<section class="blog-box">
+        <h3 class="blog-box-headline">
+          <%= @event.live_date %>
+		　     <%= @event.live_start %>
+        </h3>
+        <div class="blog-box-content">
+          <p class="category">
+            <%= @event.live_name %><br>
+            <%= @event.live_remarks %><br>
+            <%= @event.link_1 %><br>
+            <%= @event.live_email %><br>
+          </p>
+        </div>
+        <%= attachment_image_tag @event, :image, :fill, 300, 300, format: 'jpeg' %>
+        <%= link_to "編集", edit_event_path(@event.id) %>
+		<%= link_to "削除", destroy_event_path(@event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+		</div>
+	</section>
+</section>

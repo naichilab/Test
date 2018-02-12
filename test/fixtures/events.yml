@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  live_id: 1
+  live_date: 2018-02-11
+  live_start: 2018-02-11 13:40:31
+  live_name: MyString
+  live_remarks: MyString
+  link_1: MyString
+  link_2: MyString
+  link_3: MyString
+  link_4: MyString
+  live_email: MyString
+
+two:
+  live_id: 1
+  live_date: 2018-02-11
+  live_start: 2018-02-11 13:40:31
+  live_name: MyString
+  live_remarks: MyString
+  link_1: MyString
+  link_2: MyString
+  link_3: MyString
+  link_4: MyString
+  live_email: MyString
