@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pending_id: MyString
+  : 1
+  uid: MyString
+  : MyString
+  live_id: MyString
+  : 1
+
+two:
+  pending_id: MyString
+  : 1
+  uid: MyString
+  : MyString
+  live_id: MyString
+  : 1

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180211143622) do
+ActiveRecord::Schema.define(version: 20180218162122) do
 
   create_table "events", force: :cascade do |t|
     t.integer "live_id"
@@ -26,10 +26,28 @@ ActiveRecord::Schema.define(version: 20180211143622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_id"
+    t.string "uid"
+    t.string "ip"
+  end
+
+  create_table "participates", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "participate_id"
+    t.integer "live_id"
+    t.string "uid"
+  end
+
+  create_table "pendings", force: :cascade do |t|
+    t.integer "pending_id"
+    t.string "uid"
+    t.integer "live_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
+    t.string "email"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -39,14 +57,18 @@ ActiveRecord::Schema.define(version: 20180211143622) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
     t.string "nickname"
     t.string "image_url"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.string "profile_image_id"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

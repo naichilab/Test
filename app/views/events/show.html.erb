@@ -15,7 +15,27 @@
         </div>
         <%= attachment_image_tag @event, :image, :fill, 300, 300, format: 'jpeg' %>
         <%= link_to "編集", edit_event_path(@event.id) %>
-		<%= link_to "削除", destroy_event_path(@event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+		    <%= link_to "削除", destroy_event_path(@event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+        <% if @event.participated_by?(current_user) %>
+        <li>
+          <a href="#">
+            <%= link_to event_participates_path(@event), method: :delete do %>
+              <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+              <a href="#"><%= @event.participates.count %> 参加する</a>
+            <% end %>
+          </a>
+        </li>
+      <% else %>
+        <li>
+          <a href="#">
+            <%= link_to event_participates_path(@event), method: :post do %>
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+              <%= @event.participates.count %> 参加する
+            <% end %>
+      </a>
+    </li>
+  <% end %>
 		</div>
 	</section>
 </section>

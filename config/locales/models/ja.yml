@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    attributes:
+      event:
+        live_id: "ライブID"
+        live_date: "開催日"
+        live_start: "開演"
+        live_name: "ライブ名"
+        live_remarks: "詳細"
+        live_link1: "予約URL1"
+        live_link2: "予約URL2"
+        live_link3: "予約URL3"
+        live_link4: "予約URL4"
+        live_email: "メールアドレス"
+    models:
+      participate: "参加する"
+    attributes:
+      parcitipate:
+        participate_id: "参加ID"
+        live_id: "ライブID"
+        user_num: "ユーザーID"
+    models:
+      pending: "検討中"
+    attributes:
+      pending:
+        pending_id: "参加ID"
+        live_id: "ライブID"
+        user_num: "ユーザーID"

@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-md-12 post_images_container">
         <div class="post-item">
-          
           <div class="post-meta-top">
             <div class="post-image">
               <a href="images/sample-post1.jpg" class="theater">
@@ -17,20 +16,30 @@
             <h2 class="post-title">ここにタイトル</h2>
             <ul class="meta-info-cells v4 float-wrapper">
               <li>
-                <i class="fa fa-user"></i>By
-                <a href="#">投稿者名</a>
-              </li>
-              <li>
-                <i class="fa fa-calendar"></i>2017/07/21
-              </li>
-              <li>
-                <i class="fa fa-heart"></i>
-                <a href="#">202 いいね</a>
-              </li>
-              <li>
-                <i class="fa fa-comment"></i>
-                <a href="#comments">4</a>
-              </li>
+    <i class="fa fa-calendar"></i><%= @post_image.created_at.strftime('%Y/%m/%d') %>
+  </li>
+<!-- ここから -->
+<% if @post_image.favorited_by?(current_user) %>
+  <li>
+    <a href="#">
+      <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
+        <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+        <a href="#"><%= @post_image.favorites.count %> いいね</a>
+      <% end %>
+    </a>
+  </li>
+<% else %>
+  <li>
+    <a href="#">
+      <%= link_to post_image_favorites_path(@post_image), method: :post do %>
+        <i class="fa fa-heart-o" aria-hidden="true"></i>
+        <%= @post_image.favorites.count %> いいね
+      <% end %>
+    </a>
+  </li>
+<% end %>
+<!-- ここまで -->
+<i class="fa fa-comment"></i>
             </ul>
             <div class="post-content-inner mt-20">
               <p>ここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキストここにテキスト</p>

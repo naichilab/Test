@@ -279,8 +279,8 @@ Devise.setup do |config|
 
   # API key
   if Rails.env.production?
-    config.omniauth :twitter,  "Consumer key", "Consumer secret"
+    config.omniauth :twitter, "7LaaLbsEOUKxZ7I6dvM3wN9sN", "iKSGRjcuIyCoaOQgGqOWHQ5enMjqReKaCAwYuIN3CvgKXJeQ43"
   else
-    config.omniauth :twitter,  "7LaaLbsEOUKxZ7I6dvM3wN9sN", "iKSGRjcuIyCoaOQgGqOWHQ5enMjqReKaCAwYuIN3CvgKXJeQ43"
+    config.omniauth :twitter, "7LaaLbsEOUKxZ7I6dvM3wN9sN", "iKSGRjcuIyCoaOQgGqOWHQ5enMjqReKaCAwYuIN3CvgKXJeQ43"
   end
 end

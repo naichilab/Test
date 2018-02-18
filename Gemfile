@@ -62,3 +62,8 @@ gem 'devise'
 # Twitter連携
 gem 'omniauth'
 gem 'omniauth-twitter'
+# ページング
+gem 'kaminari'
+# bootstrap
+gem 'bootstrap-sass'
+gem 'jquery-rails'
