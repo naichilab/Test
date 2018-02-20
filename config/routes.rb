@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
- root to: "events#index"
 
+　# Rootはライブ一覧ページ
+  root to: "events#index"
 
   # 基礎情報ページの表示
   get '/about', to: 'application#about'
@@ -25,8 +26,6 @@ Rails.application.routes.draw do
 
   #ライブ投稿
   resources :events, only: [:new, :create, :edit, :index, :show, :destroy] do
-	    #出演者
-	    resource :live_performers, only: [:create, :destroy]
 	    #参加するボタン
 	    resource :participates, only: [:create, :destroy]
 	    #検討中ボタン

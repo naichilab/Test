@@ -69,3 +69,5 @@ gem 'kaminari'
 # bootstrap
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+#Herokuデバッグ用
+gem 'rails_12factor'
