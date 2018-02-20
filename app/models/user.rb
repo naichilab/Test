@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
     devise :database_authenticatable, :omniauthable, :registerable,
-         :recoverable, :rememberable, :trackable, :validable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   # 1Userにつき何個もイイねできる
     has_many :participates, dependent: :destroy
@@ -14,9 +14,9 @@ class User < ApplicationRecord
    attachment :profile_image
 
   # Twitter認証の場合はemailを要求しない
-  # def email_required?
-  #  (authentications.empty? || !email.blank?) && super
-  # end
+   def email_required?
+    (authentications.empty? || !email.blank?) && super
+   end
 
   # Twitterログイン認証
   def self.find_for_oauth(auth)
