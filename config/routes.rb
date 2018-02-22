@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-
 　# Rootはライブ一覧ページ
   root to: "events#index"
 
   # 基礎情報ページの表示
   get '/about', to: 'root#about'
   get '/terms', to: 'root#terms'
-  get '/privacy',to: 'root#privacy'
+  get '/privacy', to: 'root#privacy'
 
   #Twitterログイン認証
    get 'auth/:provider/callback', to: 'sessions#create'
@@ -27,17 +26,10 @@ Rails.application.routes.draw do
   #ライブ投稿
   resources :events, only: [:new, :create, :edit, :index, :show, :destroy] do
 	    #参加するボタン
-	    resource :participates, only: [:create, :destroy]
+	    resources :participates, only: [:create, :destroy]
 	    #検討中ボタン
-	    resource :pendings, only: [:create, :destroy]
+	    resources :pendings, only: [:create, :destroy]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  #get 'events/new'
-  #post 'events' => 'events#create'
-  #get 'events/:id' => 'events#show', as: 'event'
-  #get 'events' => 'events#index'
-  #get 'events/:id/edit' => 'events#edit', as: 'edit_event'
-  #patch 'events/:id' => 'events#update', as: 'update_event'
-  #delete 'events/:id' => 'events#destroy', as: 'destroy_event'
 end
