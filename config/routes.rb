@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   root to: "events#index"
 
   # 基礎情報ページの表示
-  get '/about', to: 'application#about'
-  get '/terms', to: 'application#terms'
-  get '/privacy',to: 'application#privacy'
+  get '/about', to: 'root#about'
+  get '/terms', to: 'root#terms'
+  get '/privacy',to: 'root#privacy'
 
   #Twitterログイン認証
    get 'auth/:provider/callback', to: 'sessions#create'
@@ -30,14 +30,10 @@ Rails.application.routes.draw do
 	    resource :participates, only: [:create, :destroy]
 	    #検討中ボタン
 	    resource :pendings, only: [:create, :destroy]
-	    collection do
-	    	get 'search'
-	    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #get 'events/new'
-  get 'top' => 'root#top'
   #post 'events' => 'events#create'
   #get 'events/:id' => 'events#show', as: 'event'
   #get 'events' => 'events#index'
