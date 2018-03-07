@@ -1,6 +1,8 @@
 ja:
   errors:
     messages:
+      not_saved: "入力エラーです"
+#      not_saved: "Password confirmationとPasswordの入力が一致しません"
       not_found: "は見つかりませんでした"
 #      not_found: "not found"
       already_confirmed: "は既に登録済みです"

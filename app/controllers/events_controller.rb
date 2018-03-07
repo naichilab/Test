@@ -8,18 +8,22 @@ class EventsController < ApplicationController
         # ストロングパラメーターを使用
          @event = Event.new(event_params)
         # ユーザーIDを取得
-         ＠event.uid = @current_user.id
+        #if user_signed_in?
+        # @event.uid = @current_user.uid
+        # end
         # ユーザーのipアドレスを取得
          @event.ip = request.remote_ip
 
+         @event.save
+
         # エラーチェック＆DB保存→詳細画面へリダイレクト
-        respond_to do |format|
-          if @event.valid? && @event.save
-            format.html { redirect_to event_path(event.id), notice: 'ありがとうございます！ライブ登録が完了しました！！' }
-          else
-            format.html { redirect_to event_path(event.id), notice: 'ライブ登録に失敗しました。お手数ですが最初からやり直してください。' }
-          end
-        end
+        #respond_to do |format|
+        #  if @event.valid? && @event.save
+        #    format.html { redirect_to controller: 'events', action: 'show', id: params[:id], notice: 'ありがとうございます！ライブ登録が完了しました！' }
+        #  else
+        #    format.html { redirect_to events_path, notice: 'ライブ登録に失敗しました。お手数ですが最初からやり直してください。' }
+        #  end
+        #end
     end
 
     def index
@@ -49,6 +53,10 @@ class EventsController < ApplicationController
 	private
 
     def event_params
-        params.require(:event).permit(:live_id, :live_date, :live_start, :live_name, :live_remarks, :link_1, :live_email, :image, :user, :ip)
+        params.require(:event).permit(:live_id, :live_date, :live_start, :live_name, :live_remarks, :link_1, :live_email, :image, :uid, :ip)
+    end
+
+    def user_params
+        params.require(:user).permit(:live_id, :live_date, :live_start, :live_name, :live_remarks, :link_1, :live_email, :image, :uid, :ip)
     end
 end

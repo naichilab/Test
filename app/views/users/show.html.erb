@@ -1,7 +1,7 @@
 <div class="profile-container">
     <h3 class="profile-name"><%= @user.name %></h3>
-    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>  # このように変更
-	<% if @user.id == current_user.id %>
+    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+	<% if @user.uid == current_user.uid %>
         <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
     <% end %>
 </div>
@@ -23,10 +23,11 @@
 			<%= attachment_image_tag event, :image, :fill, 100, 100, format: 'jpeg' %>
 			<%= link_to "編集", edit_event_path(event.id) %>
 			<!--もし今のユーザーがライブを投稿したユーザーと一致したら削除ボタンを表示-->
-			<% if @event.user == current_user %>
+			<% if @event.uid == current_user %>
 				<%= link_to "削除", destroy_event_path(event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 			<% end %>
-			<%= paginate @post_images, class: "pagenate" %>
+			<%= paginate @events, class: "pagenate" %>
+		<% end %>
         </div>
       </div>
     </div>

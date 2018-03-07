@@ -3,6 +3,20 @@
     <div class="row">
       <div class="col-md-8 col-sm-offset-2">
         <div class="masonry-wrapper-cols">
+		<% if flash[:notice] %>
+		  <p><%= flash[:notice] %></p>
+		<% end %>
+			<div class="lp">
+			  <div class="lp-intro" style="background-image: url(/assets/lp/hero-8854c88323cf7ef77240c654c683c0187941380ae9bdfacd6add49d98d9cc99f.jpg)">
+			    <div class="inner">
+			      <div class="lp-intro-hero">
+			        <p class="lp-intro-hero-text">おもしろい！を見つけよう</p>
+			        <a class="button is-fill-primary is-xlarge" href="/auth/twitter">
+			          さっそく使い始める
+			</a>        <span class="note">Twitterの認証ページへ移動します</span>
+			      </div>
+			    </div>
+			  </div>
 		 <h1>ライブ一覧</h1>
 		 <% @events.each do |event| %>
 		    <p></p>

@@ -1,67 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <%= csrf_meta_tags %>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <title>wArally! - お笑いライブ検索</title>
+    <meta name="description" content="wArally!は国内No.1のお笑いライブ検索サイト。今日の東京のお笑いライブスケジュールを、日付や出演者別に検索できます。チケット予約も簡単！">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- meta name definition -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meshiterro</title>
+    <meta property="og:title" content="”おもしろい！”が見つかるお笑いライブ検索サイト">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="wArally![ワラリー!]">
+    <meta property="og:description" content="wArally!は国内No.1のお笑いライブ検索サイト。今日の東京のお笑いライブスケジュールを、日付や出演者別に検索できます。チケット予約も簡単！">
+    <meta property="og:url" content="https://warally.info/">
+    <meta property="og:image" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="">
+    <meta name="twitter:site" content="@warally_info">
+    <meta name="author" content="@warally_info">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token" content="" />
+
+  　<!-- CSSファイルの読込 -->
+    <link rel="alternate" hreflang="ja" href="http://warally.info">
+    <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,600,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-  </head> 
+    <link href='http://static.tumblr.com/8wlin78/pdFoacp7p/estentheme.min.css' rel='stylesheet' type='text/css'>
+    <link href="http://static.tumblr.com/8wlin78/KZHnt0nmr/nivo-lightbox.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" media="screen" href="/assets/application-9f5dfd9252b67cb2b48b864e4ccf237bef79a0a4aa42563b0ba4853dca14e700.css" />
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-106762099-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
 
   <body>
-
     <div class="header" id="header">
       <nav class="navbar navbar-main navbar-shadow" role="navigation" id="slide-nav">
-        <div class="container relative">
-          <div class="navbar-header">
-            <a class="navbar-logo" href="/">
-              <%= image_tag('logo.png') %>
-            </a>
-   
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div id="slidemenu">
-            <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-	      	  	<li class="">
+        <div class="container relative hide-on-screen-small">
+          <div id="usermenu">
+            <ul class="nav navbar-nav navbar-left" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+              <li class="">
+                <li class="">
+                  <a href="/search">
+                    <i class="fa fa-search"></i>
+                    <span>探す</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/events/new">
+                    <i class="fa fa-plus-circle"></i>
+                    <span>ライブ登録</span>
+                  </a>
+                </li>
               <% if user_signed_in? %>
                 <li class="">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                  <a href="/users/participates">
+                    <i class="fas fa-heart"></i>
+                    <span>参加予定</span>
+                  </a>
                 </li>
                 <li class="">
-                  <%= link_to 'ライブ登録', event_path %>
-                </li>
-                <li class="">
-                  <%= link_to 'マイページ', user_path(current_user.id) %>
-                </li>
-              <% else %>
-                <li class="">
-                  <%= link_to "新規登録", new_user_registration_path %>
-                </li>
-                <li class="">
-                  <%= link_to 'Twitterでログイン', user_twitter_omniauth_authorize_path %>
+                  <a href="/users/schedule">
+                    <i class="far fa-calendar-check"></i>
+                    <span>スケジュール</span>
+                  </a>
                 </li>
               <% end %>
               </li>
-              <li class="">
-                  </li>
+            </ul>
+          </div>
+
+            <h1 class="blog-name">
+              <a href="/">wArally!</a>
+            </h1>
+
+  <% if user_signed_in? %>
+    <div class="header-nav">
+      <div class="pulldown">
+        <div class="user-icon"><span style="background-image:url(https://pbs.twimg.com/profile_images/958803950391541760/ABdXMZLE.jpg)"></span></div>
+        <div class="pulldown-content">
+          <p>ユーザー名</p>
+          <ul>
+            <li>
+              <a href="">
+                <i class="fa fa-user-o"></i> プロフィール
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <i class="fa fa-cog"></i> 設定</a>
+            </li>
+            <li>
+              <a data-confirm="ログアウトしてもよろしいですか？" href="/logout">
+                <i class="fa fa-sign-out-alt"></i> ログアウト
+              </a>
+              <%= link_to destroy_user_session_path, :method => :delete do %>
+                <i class="fa fa-sign-out-alt"></i> ログアウト
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+            <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+	      	  	<li class="">
+              <% if user_signed_in? %>
+              <% else %>
+                <li class="">
+                <%= link_to user_twitter_omniauth_authorize_path do %>
+                  <i class="far fa-twitter"></i> Twitterでログイン
+                <% end %>
+                </li>
+              <% end %>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
     </div>
-  
+
     <%= yield %>
 
-   <footer class="footer style-2">
+
+    <footer>
+        <div class="copyright">
+            <div class="full-row" style="text-align:center">
+                <span style="font-size:13.5px">
+                  <a href="/about">ABOUT</a> | <a href="/terms">利用規約</a> | <a href="/privacy">プライバシーポリシー</a> | <a href="https://twitter.com/warally_info">Twitter</a><span><br><br>
+                  &copy; wArally! 2017-2018</span>
+            </div>
+        </div>
+    </footer>
+   <!--<footer class="footer style-2">
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -69,9 +159,9 @@
               <br>
               <p class="no-margin" style="font-size: 11px;">
               <br>
-              おもしろい！をもっと身近に。
+              おもしろい！を見つけよう
               <%= image_tag('logo-white.png') %>
-              <br>2017-2018
+              <p style="text-align:center">2017-2018</p>
               </p>
             </div>
           </div>
@@ -93,6 +183,6 @@
           </div>
         </div>
       </div>
-    </footer>
+    </footer>-->
   </body>
 </html>
