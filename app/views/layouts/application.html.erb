@@ -109,9 +109,6 @@
                 <i class="fa fa-cog"></i> 設定</a>
             </li>
             <li>
-              <a data-confirm="ログアウトしてもよろしいですか？" href="/logout">
-                <i class="fa fa-sign-out-alt"></i> ログアウト
-              </a>
               <%= link_to destroy_user_session_path, :method => :delete do %>
                 <i class="fa fa-sign-out-alt"></i> ログアウト
               <% end %>

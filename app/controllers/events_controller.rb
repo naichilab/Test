@@ -12,7 +12,7 @@ class EventsController < ApplicationController
         # @event.uid = @current_user.uid
         # end
         # ユーザーのipアドレスを取得
-         @event.ip = request.remote_ip
+        # @event.ip = request.remote_ip
 
          @event.save
 
