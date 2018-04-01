@@ -1,41 +1,31 @@
 <section class="single-blog">
 	<h2 class="blog-headline">ライブ詳細</h2>
-	<section class="blog-box">
-        <h3 class="blog-box-headline">
-          <%= @event.live_date %>
-		　     <%= @event.live_start %>
-        </h3>
-        <div class="blog-box-content">
-          <p class="category">
-            <%= @event.live_name %><br>
-            <%= @event.live_remarks %><br>
-            <%= @event.link_1 %><br>
-            <%= @event.live_email %><br>
-          </p>
-        </div>
-        <%= attachment_image_tag @event, :image, :fill, 300, 300, format: 'jpeg' %>
-        <%= link_to "編集", edit_event_path(@event.id) %>
-		    <%= link_to "削除", destroy_event_path(@event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-
-        <% if @event.participated_by?(current_user) %>
-        <li>
-          <a href="#">
-            <%= link_to event_participates_path(@event), method: :delete do %>
-              <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-              <a href="#"><%= @event.participates.count %> 参加する</a>
-            <% end %>
-          </a>
-        </li>
+  <article>
+    <div class="post-card-wrap">
+      <h3 class="post-card-title"><%= @event.live_name %></h3>
+      <div class="post-card-text"><p><%= @event.live_remarks %></p>
+      <span><%= @event.id %></span>
+        <span><%= @event.live_date %></span>
+        <span><%= @event.live_start %></span>
+        <span><%= @event.link_1 %></span>
+      <span><%= @event.live_email %></span>
+      <span><%= @event.uid %></span>
+      <span><%= @event.ip %></span>
+      <%= attachment_image_tag @event, :image, :fill, 100, 100, format: 'jpeg' %>
+      <%= link_to "編集", edit_event_path(@event.id) %>
+      <!--もし今のユーザーがライブを投稿したユーザーと一致したら削除ボタンを表示-->
+      <% if user_signed_in? %>
+        <% if @event.user_id == current_user.id %>
+          <%= link_to "削除", event_path(@event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        <% end %>
       <% else %>
-        <li>
-          <a href="#">
-            <%= link_to event_participates_path(@event), method: :post do %>
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-              <%= @event.participates.count %> 参加する
-            <% end %>
+        <% if @event.ip == request.remote_ip %>
+          <%= link_to "削除", event_path(@event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+        <% end %>
+      <% end %>
+      <%= render :partial => "participates/participate", locals: { event: @event } %>
+      <%= render :partial => "pendings/pending", locals: { event: @event } %>
       </a>
     </li>
-  <% end %>
 		</div>
-	</section>
 </section>

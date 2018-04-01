@@ -73,3 +73,14 @@ gem 'jquery-rails'
 gem 'rails_12factor'
 # タイル状のレイアウト
 gem 'masonry-rails'
+# 検索用
+gem 'ransack'
+# WEBスクレイピング用
+gem 'mechanize'
+gem 'nokogiri'
+#エラーテスト用
+group :development, :test do
+  gem 'bullet'
+end
+#時刻型のデータ用
+gem 'tod'

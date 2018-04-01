@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
 !function(e) {
     var t = {};
     function n(r) {
@@ -5008,4 +5009,3 @@
     }
 }]);
 //# sourceMappingURL=application-ec98f0b137c20666595d.js.map
-

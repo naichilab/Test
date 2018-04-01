@@ -7,20 +7,21 @@ class UsersController < ApplicationController
 		@user.save
 	end
     def edit
-        @user = User.find(params[:uid])
+        @user = User.find(params[:id])
     end
 	def update
-	    @user = User.find(params[:uid])
+	    @user = User.find(params[:id])
 	    @user.update(user_params)
-	    redirect_to user_path(@user.uid)
+	    redirect_to user_path(@user.id)
 	end
 	def show
-	    @user = User.find(params[:uid])
-   		@events = @user.events.page(params[:page])
+	    @user = current_user
+   		#@events = @user.events.page(params[:page])
+   		#@events = @user.events
 	end
 
 	private
 	def user_params
-	    params.require(:user).permit(:name, :profile_image, :uid, :email, :password)
+	    params.require(:user).permit(:id, :name, :profile_image, :uid, :email, :password)
 	end
 end

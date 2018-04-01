@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   get '/about', to: 'root#about'
   get '/terms', to: 'root#terms'
   get '/privacy', to: 'root#privacy'
+  get '/setting', to: 'root#setting'
+  get '/schedule', to: 'root#schedule'
+  get '/participate', to: 'root#participate'
+
+  #ライブ情報検索
+  get 'search', to: 'events#search'
 
   #Twitterログイン認証
    get 'auth/:provider/callback', to: 'sessions#create'
@@ -25,7 +31,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update, :create, :destroy]
 
   #ライブ投稿
-  resources :events, only: [:new, :create, :edit, :index, :show, :destroy] do
+  resources :events, only: [:new, :create, :edit, :update, :index, :show, :destroy] do
 	    #参加するボタン
 	    resource :participates, only: [:create, :destroy]
 	    #検討中ボタン

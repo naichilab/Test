@@ -6,6 +6,7 @@
     <title>wArally! - お笑いライブ検索</title>
     <meta name="description" content="wArally!は国内No.1のお笑いライブ検索サイト。今日の東京のお笑いライブスケジュールを、日付や出演者別に検索できます。チケット予約も簡単！">
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -72,17 +73,17 @@
                 </li>
               <% if user_signed_in? %>
                 <li class="">
-                  <a href="/users/participates">
+                  <a href="/participate">
                     <i class="fas fa-heart"></i>
                     <span>参加予定</span>
                   </a>
                 </li>
-                <li class="">
-                  <a href="/users/schedule">
+                <!--<li class="">
+                  <a href="/schedule">
                     <i class="far fa-calendar-check"></i>
                     <span>スケジュール</span>
                   </a>
-                </li>
+                </li>-->
               <% end %>
               </li>
             </ul>
@@ -100,9 +101,9 @@
           <p>ユーザー名</p>
           <ul>
             <li>
-              <a href="">
+              <%= link_to user_path(current_user) do %>
                 <i class="fa fa-user-o"></i> プロフィール
-              </a>
+              <% end %>
             </li>
             <li>
               <a href="">
