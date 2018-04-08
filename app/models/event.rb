@@ -10,6 +10,9 @@ class Event < ApplicationRecord
 	#一人のユーザーが複数のライブを「検討中」にできる
     has_many :pendings, dependent: :destroy
 
+  #複数のリンクを持てる
+    has_many :links, dependent: :destroy
+
     #チェック
     validates :live_date, presence: true
     validates :live_name, presence: true

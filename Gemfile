@@ -86,3 +86,5 @@ end
 gem 'tod'
 #デバッグ用
 gem 'pry'
+#データ投入用
+gem 'factory_girl'

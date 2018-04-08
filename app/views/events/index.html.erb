@@ -28,8 +28,8 @@
               </div>
               <span class="date-format date-format-1">
               <font size="3">
-              <span><%= event.live_date.strftime('%Y年%m月%d日') %></span>
-              <span><%= event.live_start.strftime('%H:%M') %></span>
+              <span><%= event.date.strftime('%Y年%m月%d日') %></span>
+              <span><%= event.start.strftime('%H:%M') %></span>
               <div class="post-counts">
                 <span class="share-button"></span>
                 <div class="share-option hidden" onClick="window.open('http://twitter.com/share?text=wArally%21&url=https://tmblr.co/ZB3_lc2Tyk2Mu', 'twitter_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');">
@@ -53,11 +53,11 @@
         <div class="post-wrapper">
           <div class="post-box">
                                 <h3 class="post-title">
-                                  <%= link_to event.live_name, event_path(event.id) %>
+                                  <%= link_to event.title, event_path(event.id) %>
                                 </h3>
                             </div>
                             <div class="post-text typography">
-                                <p><%= event.live_remarks %></p>
+                                <p><%= event.description %></p>
                             </div>
                             <%= attachment_image_tag event, :image, :fill, 100, 100, format: 'jpeg' %>
                       <div class="post-text typography">
@@ -80,11 +80,10 @@
                             </div>
                             <div class="link-button">
                               <div class="link-button">
-                                <% if event.live_email.blank? %>
-                                    <%= link_to event.link_1 %>
+                                <% if event.email.blank? %>
                                     <i class="fas fa-ticket-alt" data-fa-transform="rotate-30 up-1" style="font-size:15px; color:#FFFFFF;text-align:right;"　aria-hidden="true"></i>
                                 <% else %>
-                                    <%= link_to event.live_email %>
+                                    <%= link_to event.email %>
                                     <i class></i>
                                 <% end %>
                               <div>

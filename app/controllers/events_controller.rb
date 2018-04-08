@@ -40,7 +40,6 @@ class EventsController < ApplicationController
     def search
         binding.pry
 
-        return @events = Event.where(live_date: (params[:date]).and live_name: (params[:keyword]).or live_remarks: (params[:keyword]))
         return @events = SearchKeywordService.new(params[:keyword]).execute if params[:keyword].present?
         return @events = SearchDateService.new(params[:date]).execute if params[:date].present?
 

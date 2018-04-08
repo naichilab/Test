@@ -10,24 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408072713) do
+ActiveRecord::Schema.define(version: 20180408085744) do
+
+  create_table "categories", force: :cascade do |t|
+    t.integer "event_id"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "events", force: :cascade do |t|
-    t.date "live_date"
-    t.time "live_start"
-    t.string "live_name"
-    t.string "live_remarks"
-    t.string "link_1"
-    t.string "link_2"
-    t.string "link_3"
-    t.string "link_4"
-    t.string "live_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_id"
-    t.string "uid"
-    t.string "ip"
-    t.integer "user_id"
+    t.string "title"
+    t.string "description"
+    t.date "date"
+    t.time "start"
+    t.string "tel"
+    t.string "email"
   end
 
   create_table "links", force: :cascade do |t|
@@ -40,19 +41,22 @@ ActiveRecord::Schema.define(version: 20180408072713) do
   create_table "participates", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "live_id"
-    t.string "uid"
     t.integer "user_id"
     t.integer "event_id"
   end
 
   create_table "pendings", force: :cascade do |t|
-    t.string "uid"
-    t.integer "live_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "event_id"
+  end
+
+  create_table "performers", force: :cascade do |t|
+    t.integer "event_id"
+    t.string "performer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
