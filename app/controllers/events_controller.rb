@@ -28,17 +28,31 @@ class EventsController < ApplicationController
         #  live_date_at: params[:live_date_at]
         #  live_name_or_remarks_cont: params[:live_name_or_remarks_cont]
         #}
+        require 'date'
+        @today = Date.today
+        @tomorrow = @today + 1
+
         @q = Event.ransack(params[:q])
         #@students = @q.result(distinct: true)
     	@events = Event.page(params[:page]).reverse_order
     end
 
     def search
-        @q = Event.search(params[:q])
-        @events = @q.result(distinct: true)
-            respond_to do |format|
-              format.html # index.html.erb
-            end
+        binding.pry
+
+        return @events = Event.where(live_date: (params[:date]).and live_name: (params[:keyword]).or live_remarks: (params[:keyword]))
+        return @events = SearchKeywordService.new(params[:keyword]).execute if params[:keyword].present?
+        return @events = SearchDateService.new(params[:date]).execute if params[:date].present?
+
+        respond_to do |format|
+          format.html # index.html.erb
+        end
+    end
+
+    def today
+       respond_to do |format|
+          format.html # index.html.erb
+        end
     end
 
     def show
@@ -74,6 +88,8 @@ class EventsController < ApplicationController
 
     #検索クエリ
     def search_params
-        params.require(:q).permit(:live_date_eq, :live_name_or_remarks_cont)
+        params.require(:keyword).permit(:live_name_or_remarks_cont)
+        params.require(:date).permit(:live_date_eq)
+        params.require(:date_and_keyword).permit
     end
 end

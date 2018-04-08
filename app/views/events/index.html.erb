@@ -7,7 +7,7 @@
 		  <p><%= flash[:notice] %></p>
 		<% end %>
 			<div class="lp">
-			  <div class="lp-intro" style="background-image: url()">
+			  <div class="lp-intro">
 			    <div class="inner">
 			      <div class="lp-intro-hero">
 			        <p class="lp-intro-hero-text">おもしろい！を見つけよう</p>
@@ -15,59 +15,89 @@
 			      </div>
 			    </div>
 			  </div>
+      </div>
   <main class="content">
-    <div class="snackbar"><span></span></div>
+    <div class="snackbar"><span><h2>ライブ一覧</h2></span></div>
   <div class="lp-timeline">
     <div class="lp-timeline-wrap">
-      <div class="lp-timeline-inner">
+	   <% @events.each do |event| %>
+      <article class="post element hard-shadows">
+          <div class="post-header post-header-s1 post-date-1">
+              <div class="post-icon">
+                  <span class="icon-permalink"></span>
+              </div>
+              <span class="date-format date-format-1">
+              <font size="3">
+              <span><%= event.live_date.strftime('%Y年%m月%d日') %></span>
+              <span><%= event.live_start.strftime('%H:%M') %></span>
+              <div class="post-counts">
+                <span class="share-button"></span>
+                <div class="share-option hidden" onClick="window.open('http://twitter.com/share?text=wArally%21&url=https://tmblr.co/ZB3_lc2Tyk2Mu', 'twitter_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');">
+                    Twitter
+                </div>
+                <div class="share-option hidden" onClick="window.open('https://plus.google.com/share?url=https://tmblr.co/ZB3_lc2Tyk2Mu', 'google_plus_share', 'height=320, width=500, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');">
+                    LINE
+                </div>
+                <div class="share-option hidden" onClick="window.open('http://www.facebook.com/sharer/sharer.php?u=https://tmblr.co/ZB3_lc2Tyk2Mu&t=wArally%21', 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');">
+                    Facebook
+                </div>
+                <!--もし今のユーザーがライブを投稿したユーザーと一致したら削除ボタンを表示-->
+                <% if user_signed_in? %>
+                  <% if event.user_id == current_user %>
+                    <i class="fas fa-trash-alt"></i>
+                    <%= link_to "削除", event_path(event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                  <% end %>
+                <% end %>
+              </div>
 
-		 <h1>ライブ一覧</h1>
-
-
-	<% @events.each do |event| %>
-	<article>
-    <div class="post-card-wrap">
-      <h3 class="post-card-title"><%= link_to event.live_name, event_path(event.id) %></h3>
-      <div class="post-card-text"><p><%= event.live_remarks %></p>
-		 	<span><%= event.id %></span>
-		    <span><%= event.live_date %></span>
-		    <span><%= event.live_start %></span>
-		    <span><%= event.link_1 %></span>
-		 	<span><%= event.live_email %></span>
-		 	<span><%= event.uid %></span>
-		 	<span><%= event.ip %></span>
-			<%= attachment_image_tag event, :image, :fill, 100, 100, format: 'jpeg' %>
-			<%= link_to "編集", edit_event_path(event.id) %>
-			<!--もし今のユーザーがライブを投稿したユーザーと一致したら削除ボタンを表示-->
-      <% if user_signed_in? %>
-				<% if event.user_id == current_user %>
-					<%= link_to "削除", event_path(event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-				<% end %>
-			<% end %>
-      <% puts "XXXXXXX" %>
-      <% p event %>
-      <div id="participate-bottun">
-      <%= render :partial => "participates/participate", locals: { event: event } %>
-      </div>
-      <div>
-      <%= render :partial => "pendings/pending", locals: { event: event } %>
-      </div>
-      </div>
-    </div>
-  </a>
-</article>
+        <div class="post-wrapper">
+          <div class="post-box">
+                                <h3 class="post-title">
+                                  <%= link_to event.live_name, event_path(event.id) %>
+                                </h3>
+                            </div>
+                            <div class="post-text typography">
+                                <p><%= event.live_remarks %></p>
+                            </div>
+                            <%= attachment_image_tag event, :image, :fill, 100, 100, format: 'jpeg' %>
+                      <div class="post-text typography">
+                          <div class="post-options">
+                            <div class="edit-box">
+                              <div class="edit-button">
+                              <i class="fas fa-edit" style="font-size:15px; color:#FFFFFF;text-align:right;"　aria-hidden="true"></i>
+                              <%= link_to "編集", edit_event_path(event.id) %>
+                              </div>
+                            </div>
+                            <div class="like-button">
+                                <div id="participate-bottun">
+                                <%= render :partial => "participates/participate", locals: { event: event } %>
+                                </div>
+                            </div>
+                            <div class="pending-button">
+                              <div class ="pending-button">
+                                <%= render :partial => "pendings/pending", locals: { event: event } %>
+                              </div>
+                            </div>
+                            <div class="link-button">
+                              <div class="link-button">
+                                <% if event.live_email.blank? %>
+                                    <%= link_to event.link_1 %>
+                                    <i class="fas fa-ticket-alt" data-fa-transform="rotate-30 up-1" style="font-size:15px; color:#FFFFFF;text-align:right;"　aria-hidden="true"></i>
+                                <% else %>
+                                    <%= link_to event.live_email %>
+                                    <i class></i>
+                                <% end %>
+                              <div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
 		<% end %>
-
+      <%= link_to Date.today.prev_day, search_path(date: 'prev_day') %>
+      <%= link_to Date.today.next_day, search_path(date: 'next_day') %>
 			<%= paginate @events, class: "pagenate" %>
       </div>
     </div>
-    <div class="lp-timeline-more">
-      <a class="button is-primary" href="/search">
-        <i class="fa fa-search"></i> 探す
-</a>      から全てのプロジェクトを検索することができます。
-    </div>
-  </div>
-
   <div class="lp-panel">
     <div class="inner">
       <div class="lp-panel-item">

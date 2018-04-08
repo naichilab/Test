@@ -30,7 +30,7 @@ $(document).ready(function () {
         } else{
             $('.header').before('<div class="slide-nav-backdrop"></div>');
         }
-        
+
         var selected = $('.navbar-main').hasClass('slide-active');
 
         $('#slidemenu').stop().animate({

@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 	def show
 	    @user = current_user
    		#@events = @user.events.page(params[:page])
-   		#@events = @user.events
+   		@events = @user.events
 	end
 
 	private

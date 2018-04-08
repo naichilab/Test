@@ -1,15 +1,15 @@
-<%= search_form_for(@q, url:search_path) do |f| %>
-	日付から探す<br>
-    <span><%= link_to '今日', search_path(:live_at) %></span>
-    <span><%= link_to '明日', search_path(:live_at) %></span>
-    <span><%= link_to '次の土曜', search_path(:live_at) %></span>
-    <span><%= link_to '次の日曜', search_path(:live_at) %></span><br>
-    <%= f.search_field :live_date_eq,:placeholder => "日付を指定する"  %><br>
-<% end %>
+    日付から探す<br>
+    <span><%= link_to '今日',search_path(date: "today") %></span>
+    <span><%= link_to '明日', search_path(date: "tomorrow") %></span>
+    <span><%= link_to '次の土曜', search_path(date: "next_sat") %></span>
+    <span><%= link_to '次の日曜', search_path(date: "next_sun") %></span><br>
+	<%= search_form_for(@q, url:search_path) do |f| %>
+    	<%= f.date_select :live_date_eq %><br>
+	<% end %>
 
 <%= search_form_for(@q, url:search_path) do |f| %>
     キーワードで探す<br>
-    <%= f.search_field :live_name_or_live_remarks_cont_and_live_date_after %><%= f.submit '検索' %>
+    <%= f.search_field :live_name_or_live_remarks_cont %><%= f.submit '検索' %>
 <% end %>
 
 <%= search_form_for(@q, url:search_path) do |f| %>

@@ -20,10 +20,11 @@ class ApplicationController < ActionController::Base
 	render '/terms'
   end
 
-  # トップページの表示
-  def top
-  render '/top'
-  end
+
+  # 設定ページの表示
+  #def top
+  #render '/top'
+  #end
 
   # 設定ページの表示
   def setting

@@ -5,11 +5,13 @@
 
     <title>wArally! - お笑いライブ検索</title>
     <meta name="description" content="wArally!は国内No.1のお笑いライブ検索サイト。今日の東京のお笑いライブスケジュールを、日付や出演者別に検索できます。チケット予約も簡単！">
-
+    <meta name="keywords" content="お笑い,お笑いライブ,東京,千葉,神奈川,埼玉,首都圏,渋谷,下北沢,新宿,中野,阿佐ヶ谷,高円寺,今日,明日,週末,スケジュール,予定,チケット,予約,取り置き,販売,購入,予約受付フォーム" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- meta name definition -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,19 +55,17 @@
   </head>
 
   <body>
-    <div class="header" id="header">
-      <nav class="navbar navbar-main navbar-shadow" role="navigation" id="slide-nav">
-        <div class="container relative hide-on-screen-small">
-          <div id="usermenu">
-            <ul class="nav navbar-nav navbar-left" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-              <li class="">
-                <li class="">
-                  <a href="/search">
-                    <i class="fa fa-search"></i>
-                    <span>探す</span>
-                  </a>
-                </li>
-                <li class="">
+  <header class="header">
+    <div class="inner">
+        <div class="header-menubar hide-on-screen-small">
+            <ul class="nav navbar-nav" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+            <li>
+              <a href="/search">
+                <i class="fa fa-search"></i>
+                <span>探す</span>
+              </a>
+            </li>
+                <li>
                   <a href="/events/new">
                     <i class="fa fa-plus-circle"></i>
                     <span>ライブ登録</span>
@@ -85,57 +85,54 @@
                   </a>
                 </li>-->
               <% end %>
-              </li>
             </ul>
+        </div>
+
+      <h1 class="logo">
+        <img src="assets/logo_icon.png" style="height:60px"><a href="/">wArally!<span style="font-size:12px">- お笑いライブ検索</span></a>
+      </h1>
+
+      <% if user_signed_in? %>
+        <div class="header-nav">
+          <div class="pulldown">
+            <div class="user-icon"><span style="background-image:url(https://pbs.twimg.com/profile_images/958803950391541760/ABdXMZLE.jpg)"></span></div>
+            <div class="pulldown-content">
+              <p>ユーザー名</p>
+              <ul>
+                <li>
+                  <%= link_to user_path(current_user) do %>
+                    <i class="fa fa-user-o"></i> プロフィール
+                  <% end %>
+                </li>
+                <li>
+                  <a href="">
+                    <i class="fa fa-cog"></i> 設定</a>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, :method => :delete do %>
+                    <i class="fa fa-sign-out-alt"></i> ログアウト
+                  <% end %>
+                </li>
+              </ul>
+            </div>
           </div>
+        </div>
+      <% end %>
 
-            <h1 class="blog-name">
-              <a href="/">wArally!</a>
-            </h1>
-
-  <% if user_signed_in? %>
-    <div class="header-nav">
-      <div class="pulldown">
-        <div class="user-icon"><span style="background-image:url(https://pbs.twimg.com/profile_images/958803950391541760/ABdXMZLE.jpg)"></span></div>
-        <div class="pulldown-content">
-          <p>ユーザー名</p>
+      <div class="header-nav">
+          <% if user_signed_in? %>
+          <% else %>
           <ul>
             <li>
-              <%= link_to user_path(current_user) do %>
-                <i class="fa fa-user-o"></i> プロフィール
-              <% end %>
+            <%= link_to user_twitter_omniauth_authorize_path,class: "button is-fill-primary" do %>
+              <i class="fa fa-twitter"></i> Twitterでログイン
+            <% end %>
             </li>
-            <li>
-              <a href="">
-                <i class="fa fa-cog"></i> 設定</a>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, :method => :delete do %>
-                <i class="fa fa-sign-out-alt"></i> ログアウト
-              <% end %>
-            </li>
-          </ul>
-        </div>
-      </div>
+          <ul>
+          <% end %>
+       </div>
     </div>
-  </div>
-  <% end %>
-            <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-	      	  	<li class="">
-              <% if user_signed_in? %>
-              <% else %>
-                <li class="">
-                <%= link_to user_twitter_omniauth_authorize_path do %>
-                  <i class="far fa-twitter"></i> Twitterでログイン
-                <% end %>
-                </li>
-              <% end %>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
+　</header>
 
     <%= yield %>
 
@@ -158,7 +155,7 @@
               <p class="no-margin" style="font-size: 11px;">
               <br>
               おもしろい！を見つけよう
-              <%= image_tag('logo-white.png') %>
+              <%= image_tag('logo.png') %>
               <p style="text-align:center">2017-2018</p>
               </p>
             </div>

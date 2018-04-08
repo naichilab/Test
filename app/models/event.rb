@@ -43,6 +43,11 @@ class Event < ApplicationRecord
         end
     end
 
+    #日付検索
+    ransacker :live_date, type: :date do
+      Arel.sql('date(created_at)')
+    end
+
     #
     def self.get_lumine(link)
         lumine = Mechanize.new

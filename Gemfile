@@ -84,3 +84,5 @@ group :development, :test do
 end
 #時刻型のデータ用
 gem 'tod'
+#デバッグ用
+gem 'pry'
