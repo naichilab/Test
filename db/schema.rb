@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409112500) do
+ActiveRecord::Schema.define(version: 20180409113045) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 20180409112500) do
     t.datetime "updated_at", null: false
     t.integer "event_id"
     t.index ["event_id"], name: "index_categories_on_event_id"
+  end
+
+  create_table "event_change_histories", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+    t.string "user_ip", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_change_histories_on_event_id"
+    t.index ["user_id"], name: "index_event_change_histories_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -30,6 +40,14 @@ ActiveRecord::Schema.define(version: 20180409112500) do
     t.time "start"
     t.string "tel"
     t.string "email"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.integer "event_id"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_links_on_event_id"
   end
 
   create_table "participates", force: :cascade do |t|
@@ -51,10 +69,11 @@ ActiveRecord::Schema.define(version: 20180409112500) do
   end
 
   create_table "performers", force: :cascade do |t|
-    t.integer "event_id"
     t.string "performer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "event_id"
+    t.index ["event_id"], name: "index_performers_on_event_id"
   end
 
   create_table "users", force: :cascade do |t|
