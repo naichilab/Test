@@ -2,27 +2,15 @@
 	<h2 class="blog-headline">ライブ詳細</h2>
   <article>
     <div class="post-card-wrap">
-      <h3 class="post-card-title"><%= @event.live_name %></h3>
-      <div class="post-card-text"><p><%= @event.live_remarks %></p>
+      <h3 class="post-card-title"><%= @event.title %></h3>
+      <div class="post-card-text"><p><%= @event.description %></p>
       <span><%= @event.id %></span>
-        <span><%= @event.live_date %></span>
-        <span><%= @event.live_start %></span>
-        <span><%= @event.link_1 %></span>
-      <span><%= @event.live_email %></span>
-      <span><%= @event.uid %></span>
-      <span><%= @event.ip %></span>
+        <span><%= @event.date %></span>
+        <span><%= @event.start %></span>
+        <span><%= @event.tel %></span>
+      <span><%= @event.email %></span>
       <%= attachment_image_tag @event, :image, :fill, 100, 100, format: 'jpeg' %>
-      <%= link_to "編集", edit_event_path(@event.id) %>
-      <!--もし今のユーザーがライブを投稿したユーザーと一致したら削除ボタンを表示-->
-      <% if user_signed_in? %>
-        <% if @event.user_id == current_user.id %>
-          <%= link_to "削除", event_path(@event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-        <% end %>
-      <% else %>
-        <% if @event.ip == request.remote_ip %>
-          <%= link_to "削除", event_path(@event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-        <% end %>
-      <% end %>
+
       <%= render :partial => "participates/participate", locals: { event: @event } %>
       <%= render :partial => "pendings/pending", locals: { event: @event } %>
       </a>

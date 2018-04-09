@@ -13,9 +13,15 @@ class Event < ApplicationRecord
   #複数のリンクを持てる
     has_many :links, dependent: :destroy
 
-    #チェック
-    validates :live_date, presence: true
-    validates :live_name, presence: true
+  #複数の変更履歴を持てる
+    has_many :event_change_histories, dependent: :destroy
+
+  #複数の出演者を持てる
+    has_many :performers, dependent: :destroy
+
+    #存在チェック
+    validates :date, presence: true
+    validates :title, presence: true
 
     #　参加するになってるかチェック
     def participated_by?(user)
@@ -25,6 +31,11 @@ class Event < ApplicationRecord
     # 検討中になってるかチェック
     def pending_by?(user)
       pendings.where(user_id: user.id).exists?
+    end
+
+    # リンクの件数をチェック
+    def how_many_urls?(event)
+      links.where(event_id: event.id).count
     end
 
     def self.lumine_urls

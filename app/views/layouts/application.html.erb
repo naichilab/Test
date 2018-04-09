@@ -59,23 +59,23 @@
     <div class="inner">
         <div class="header-menubar hide-on-screen-small">
             <ul class="nav navbar-nav" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-            <li>
+            <li class="user-menu-button">
               <a href="/search">
                 <i class="fa fa-search"></i>
                 <span>探す</span>
               </a>
             </li>
-                <li>
+                <li class="user-menu-button">
                   <a href="/events/new">
                     <i class="fa fa-plus-circle"></i>
                     <span>ライブ登録</span>
                   </a>
                 </li>
               <% if user_signed_in? %>
-                <li class="">
+                <li class="user-menu-button">
                   <a href="/participate">
                     <i class="fas fa-heart"></i>
-                    <span>参加予定</span>
+                    <span> 参加予定</span>
                   </a>
                 </li>
                 <!--<li class="">
@@ -124,7 +124,7 @@
           <% else %>
           <ul>
             <li>
-            <%= link_to user_twitter_omniauth_authorize_path,class: "button is-fill-primary" do %>
+            <%= link_to user_twitter_omniauth_authorize_path,class: "twitter-button" do %>
               <i class="fa fa-twitter"></i> Twitterでログイン
             <% end %>
             </li>
@@ -133,10 +133,7 @@
        </div>
     </div>
 　</header>
-
     <%= yield %>
-
-
     <footer>
         <div class="copyright">
             <div class="full-row" style="text-align:center">

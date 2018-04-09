@@ -1,6 +1,6 @@
-class SearchEventService
+class SearchKeywordService
 
-    def initialize(keyword_param)
+    def initialize(date_param,keyword_param)
         @keyword = keyword_param
     end
 

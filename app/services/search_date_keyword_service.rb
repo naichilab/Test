@@ -1,4 +1,4 @@
-class SearchEventService
+class SearchDateKeywordService
 
     def initialize(date_param, keyword_param)
         @date = date_param

@@ -4,16 +4,16 @@
 <%= form_for(@event) do |f| %>
 
     <h4>開催日</h4>
-    <%= f.date_select :live_date %>
+    <%= f.date_select :date %>
 
     <h4>開演</h4>
-    <%= f.time_select :live_start %>
+    <%= f.time_select :start %>
 
     <h4>タイトル</h4>
-    <%= f.text_field :live_name,:placeholder => "タイトル" %>
-    <%= f.text_area :live_remarks,:placeholder => "説明" %>
-    <%= f.text_field :link_1,:placeholder => "URL" %>
-	<%= f.text_field :live_email,:placeholder => "メールアドレス"  %>
+    <%= f.text_field :title,:placeholder => "タイトル" %>
+    <%= f.text_area :description,:placeholder => "説明" %>
+	<%= f.text_field :email,:placeholder => "メールアドレス"  %>
+    <%= f.text_field :tel,:placeholder => "電話予約"  %>
 
     <h4>画像</h4>
 	<%= f.attachment_field :image %>

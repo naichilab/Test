@@ -1,0 +1,7 @@
+	<% if event.email.present? %>
+		<i class="fas fa-envelope"></i>
+		<%= mail_to(event.email, name = current_user.name, '予約する') %>
+	<% elsif event.tel.present? %>
+		<i class="fas fa-phone"></i>
+		<%= link_to '予約する','tel:'+event.tel %>
+	<% end %>

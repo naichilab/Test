@@ -3,14 +3,3 @@
     <span><%= link_to '明日', search_path(date: 'tomorrow') %></span>
     <span><%= link_to '次の土曜', search_path(date: 'next_sat') %></span>
     <span><%= link_to '次の日曜', search_path(date: 'next_sun') %></span><br>
-
-    <%= search_form_for(@event, url:search_path) do |f| %>
-        <%= f.date_select :date_eq %><br>
-        キーワードで探す<br>
-        <%= f.search_field :title_or_description_or_cont %>
-        カテゴリで探す<br>
-        <span><%= link_to '単独ライブ', search_path(:live_at) %></span>
-        <span><%= link_to '無料', search_path(:live_at) %></span>
-        <span><%= link_to 'エントリー制', search_path(:live_at) %></span>
-        <%= f.submit '検索' %>
-    <% end %>

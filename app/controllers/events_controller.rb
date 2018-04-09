@@ -7,12 +7,6 @@ class EventsController < ApplicationController
 	def create
         # ストロングパラメーターを使用
          @event = Event.new(event_params)
-        # ユーザーIDを取得
-        if user_signed_in?
-         @event.uid = current_user.uid
-        end
-        # ユーザーのipアドレスを取得
-         @event.ip = request.remote_ip
 
         # エラーチェック＆DB保存→詳細画面へリダイレクト
         if @event.save
@@ -40,6 +34,7 @@ class EventsController < ApplicationController
     def search
         binding.pry
 
+        return @events = SearchDateKeywordService.new(params[:date],params[:keyword]).execute if params[:date].present? && params[:keyword].present?
         return @events = SearchKeywordService.new(params[:keyword]).execute if params[:keyword].present?
         return @events = SearchDateService.new(params[:date]).execute if params[:date].present?
 
@@ -64,6 +59,13 @@ class EventsController < ApplicationController
 
     def update
     	@event = Event.find(params[:id])
+        # ユーザーIDを取得
+        if user_signed_in?
+         @event.event_change_histories.user_id = current_user.user_id
+        end
+        # ユーザーのipアドレスを取得
+         @event.event_change_histories.user_ip = request.remote_ip
+
         @event.update(event_params)
         redirect_to event_path(params[:id])
     end
@@ -77,7 +79,17 @@ class EventsController < ApplicationController
 	private
     #ライブ情報
     def event_params
-        params.require(:event).permit(:id,:live_date, :live_start, :live_name, :live_remarks, :link_1, :live_email, :image, :uid, :ip, :user_id)
+        params.require(:event).permit(:id,:date, :start, :title, :description, :tel, :email, :image)
+    end
+
+    #更新履歴
+    def event_params
+        params.require(:event).permit(:id,:date, :start, :title, :description, :tel, :email, :image)
+    end
+
+    #ライブ情報
+    def link_params
+        params.require(:link).permit(:url)
     end
 
     #ユーザー情報

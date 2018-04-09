@@ -28,6 +28,7 @@
               </div>
               <span class="date-format date-format-1">
               <font size="3">
+              <% wd = ["日", "月", "火", "水", "木", "金", "土"] %>
               <span><%= event.date.strftime('%Y年%m月%d日') %></span>
               <span><%= event.start.strftime('%H:%M') %></span>
               <div class="post-counts">
@@ -41,13 +42,6 @@
                 <div class="share-option hidden" onClick="window.open('http://www.facebook.com/sharer/sharer.php?u=https://tmblr.co/ZB3_lc2Tyk2Mu&t=wArally%21', 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');">
                     Facebook
                 </div>
-                <!--もし今のユーザーがライブを投稿したユーザーと一致したら削除ボタンを表示-->
-                <% if user_signed_in? %>
-                  <% if event.user_id == current_user %>
-                    <i class="fas fa-trash-alt"></i>
-                    <%= link_to "削除", event_path(event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-                  <% end %>
-                <% end %>
               </div>
 
         <div class="post-wrapper">
@@ -80,12 +74,7 @@
                             </div>
                             <div class="link-button">
                               <div class="link-button">
-                                <% if event.email.blank? %>
-                                    <i class="fas fa-ticket-alt" data-fa-transform="rotate-30 up-1" style="font-size:15px; color:#FFFFFF;text-align:right;"　aria-hidden="true"></i>
-                                <% else %>
-                                    <%= link_to event.email %>
-                                    <i class></i>
-                                <% end %>
+                                <%= render :partial => "events/link", locals: { event: event } %>
                               <div>
                             </div>
                         </div>
@@ -133,19 +122,12 @@
   <div class="lp-footer">
     <div class="inner">
       <div class="logo">wArally!</div>
-      <p>ログインするとwArally!のすべての機能をご利用いただけます。</p>
-        <a class="button is-fill-primary is-xlarge" href="/auth/twitter">
-          <i class="fab fa-twitter"></i>さっそく使い始める
+      <p>ログインするとwArally!のすべての機能をご利用いただけます！</p>
+        <a class="button twitter-button-large" href="/auth/twitter">
+          <i class="fab fa-twitter"></i> さっそく使い始める
         </a>
   </div>
-
 </div>
-
-
-  </main>
-
-        </div>
-      </div>
-    </div>
-  </div>
+</main>
+</div>
 </section>
