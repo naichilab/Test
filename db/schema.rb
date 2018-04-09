@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408085744) do
+ActiveRecord::Schema.define(version: 20180409110327) do
 
   create_table "categories", force: :cascade do |t|
     t.integer "event_id"
@@ -31,12 +31,8 @@ ActiveRecord::Schema.define(version: 20180408085744) do
     t.string "email"
   end
 
-  create_table "links", force: :cascade do |t|
-    t.integer "event_id"
-    t.string "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Could not dump table "links" because of following StandardError
+#   Unknown type '' for column 'event'
 
   create_table "participates", force: :cascade do |t|
     t.datetime "created_at", null: false

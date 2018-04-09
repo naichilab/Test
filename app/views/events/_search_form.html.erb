@@ -4,10 +4,8 @@
     <span><%= link_to '次の土曜', search_path(date: 'next_sat') %></span>
     <span><%= link_to '次の日曜', search_path(date: 'next_sun') %></span><br>
 
-    <%= search_form_for(@time, url:search_path) do |f| %>
-        <%= f.date_select :live_date_eq %><br>
-        <%= f.check_box :start_lt '昼(07:00 ~ 17:59)' %>
-        <%= f.check_box :start_ '夜(18:00 ~ 24:30)' %>
+    <%= search_form_for(@event, url:search_path) do |f| %>
+        <%= f.date_select :date_eq %><br>
         キーワードで探す<br>
         <%= f.search_field :title_or_description_or_cont %>
         カテゴリで探す<br>
