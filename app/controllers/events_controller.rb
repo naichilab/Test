@@ -3,7 +3,6 @@ class EventsController < ApplicationController
 	def new
 		@event = Event.new
         @event.build_event_change_histories
-         
 	end
 
 	def create
@@ -85,7 +84,7 @@ class EventsController < ApplicationController
 	private
     #ライブ情報
     def event_params
-        params.require(:event).permit(:id,:date, :start, :title, :description, :tel, :email, :image)
+        params.require(:event).permit(:id,:date, :start, :title, :description, :tel, :email, :image,event_links_attributes: [:id, :event_id, :url],event_change_histories_attributes: [:id, :event_id, :user_id, :user_ip], event_performers_attributes: [:id, :event_id, :performer])
     end
 
     #更新履歴

@@ -9,11 +9,14 @@
     <h4>開演</h4>
     <%= f.time_select :start %>
 
-    <h4>タイトル</h4>
     <%= f.text_field :title,:placeholder => "タイトル" %>
-    <%= f.text_area :description,:placeholder => "説明" %>
+    <%= f.text_area :description,:placeholder => "内容" %>
 	<%= f.text_field :email,:placeholder => "メールアドレス"  %>
-    <%= f.text_field :tel,:placeholder => "電話予約"  %>
+    <%= f.text_field :tel,:placeholder => "電話番号"  %>
+
+    <%= form_for (:event_link) do |fin| %>
+    <%= f.text_field :url,:placeholder => "予約URL" %>
+    <% end %>
 
     <h4>画像</h4>
 	<%= f.attachment_field :image %>

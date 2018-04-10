@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PerformerTest < ActiveSupport::TestCase
+class EventCategoryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
