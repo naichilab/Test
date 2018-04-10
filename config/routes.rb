@@ -40,6 +40,14 @@ Rails.application.routes.draw do
       resource :participates, only: [:create, :destroy]
       #検討中ボタン
       resource :pendings, only: [:create, :destroy]
+      #出演者
+      resource :event_performers, only: [:create, :update,:destroy]
+      #リンク
+      resource :event_links, only: [:create, :update,:destroy]
+      #カテゴリ
+      resource :event_categories, only: [:create, :update,:destroy]
+      #更新履歴
+      resource :event_change_histories, only: [:create, :destroy]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

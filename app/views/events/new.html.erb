@@ -7,15 +7,23 @@
     <%= f.date_select :date %>
 
     <h4>開演</h4>
-    <%= f.time_select :start %>
+    <%= f.time_select :start %><br>
 
-    <%= f.text_field :title,:placeholder => "タイトル" %>
-    <%= f.text_area :description,:placeholder => "内容" %>
-	<%= f.text_field :email,:placeholder => "メールアドレス"  %>
-    <%= f.text_field :tel,:placeholder => "電話番号"  %>
+    <%= f.text_field :title,:placeholder => "タイトル" %><br>
+    <%= f.text_area :description,:placeholder => "内容" %><br>
+	<%= f.text_field :email,:placeholder => "メールアドレス"  %><br>
+    <%= f.text_field :tel,:placeholder => "電話番号"  %><br>
 
-    <%= form_for (:event_link) do |fin| %>
-    <%= f.text_field :url,:placeholder => "予約URL" %>
+    <%= f.fields_for :event_links do |urls_form| %>
+        <%= urls_form.text_field :url,:placeholder => "予約URL"  %><br>
+    <% end %>
+
+    <%= f.fields_for :event_performers do |performers_form| %>
+        <%= performers_form.text_field :performer,:placeholder => "出演者"  %><br>
+    <% end %>
+
+    <%= f.fields_for :event_categories do |categories_form| %>
+        <%= categories_form.text_field :category,:placeholder => "カテゴリ"  %><br>
     <% end %>
 
     <h4>画像</h4>

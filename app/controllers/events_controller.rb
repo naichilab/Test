@@ -2,22 +2,17 @@ class EventsController < ApplicationController
 
 	def new
 		@event = Event.new
-        @event.build_event_change_histories
 	end
 
 	def create
         # ストロングパラメーターを使用
          @event = Event.new(event_params)
 
-        # 変更履歴テーブルを更新
-
-         render template 
-
         # エラーチェック＆DB保存→詳細画面へリダイレクト
         if @event.save
             redirect_to "/events/#{@event.id}" , notice: 'ありがとうございます！ライブ登録が完了しました！'
         else
-            flash.now[:error] = 'ライブ登録に失敗しました。お手数ですが最初からやり直してください。'
+            flash.now[:error] = 'ライブ登録に失敗しました...。お手数ですが最初からやり直してください。'
             render :new
         end
     end
@@ -84,17 +79,7 @@ class EventsController < ApplicationController
 	private
     #ライブ情報
     def event_params
-        params.require(:event).permit(:id,:date, :start, :title, :description, :tel, :email, :image,event_links_attributes: [:id, :event_id, :url],event_change_histories_attributes: [:id, :event_id, :user_id, :user_ip], event_performers_attributes: [:id, :event_id, :performer])
-    end
-
-    #更新履歴
-    def event_params
-        params.require(:event).permit(:id,:date, :start, :title, :description, :tel, :email, :image)
-    end
-
-    #ライブ情報
-    def link_params
-        params.require(:link).permit(:url)
+        params.require(:event).permit(:id,:date, :start, :title, :description, :tel, :email, :image,event_links_attributes: [:id, :event_id, :url],event_change_histories_attributes: [:id, :event_id, :user_id, :user_ip], event_performers_attributes: [:id, :event_id, :performer],event_categories_attributes: [:id,:event_id, :category])
     end
 
     #ユーザー情報
