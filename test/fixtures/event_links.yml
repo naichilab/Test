@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  event: one
+  event: 
   url: MyString
 
 two:
-  event: two
+  event: 
   url: MyString

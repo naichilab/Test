@@ -1,9 +1,6 @@
 class Event < ApplicationRecord
 	attachment :image
 
-	#一人のユーザーが複数のライブを登録できる
-	#belongs_to :user
-
 	#一人のユーザーが複数のライブに参加できる
     has_many :participates, dependent: :destroy
 
@@ -11,13 +8,16 @@ class Event < ApplicationRecord
     has_many :pendings, dependent: :destroy
 
   #複数のリンクを持てる
-    has_many :links, dependent: :destroy
+    has_many :event_links, dependent: :destroy
+    accepts_nested_attributes_for :event_links
 
   #複数の変更履歴を持てる
     has_many :event_change_histories, dependent: :destroy
+    accepts_nested_attributes_for :event_change_histories
 
   #複数の出演者を持てる
     has_many :performers, dependent: :destroy
+    accepts_nested_attributes_for :performers
 
     #存在チェック
     validates :date, presence: true

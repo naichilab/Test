@@ -9,7 +9,6 @@ class EventChangeHistoryController < ApplicationController
         end
 
         # ユーザーのipアドレスを保存
-         binding.pry
          event.event_change_histories.user_ip = request.remote_ip
          event_change_history.save
     end
@@ -17,7 +16,7 @@ class EventChangeHistoryController < ApplicationController
     private
 
     def event_params
-        params.require(:event).permit(:id, :live_date, :live_start, :live_name, :live_remarks, :link_1, :live_email, :image, :uid, :ip)
+        params.require(:event).permit(:id, :date, :start, :title, :description, :tel, :email, :image)
     end
 
     def user_params

@@ -2,11 +2,17 @@ class EventsController < ApplicationController
 
 	def new
 		@event = Event.new
+        @event.build_event_change_histories
+         
 	end
 
 	def create
         # ストロングパラメーターを使用
          @event = Event.new(event_params)
+
+        # 変更履歴テーブルを更新
+
+         render template 
 
         # エラーチェック＆DB保存→詳細画面へリダイレクト
         if @event.save

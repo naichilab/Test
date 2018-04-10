@@ -1,0 +1,2 @@
+class EventLink < ApplicationRecord
+end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class LinkTest < ActiveSupport::TestCase
+class EventLinkTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
