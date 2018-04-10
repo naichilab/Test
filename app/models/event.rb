@@ -62,7 +62,7 @@ class Event < ApplicationRecord
       Arel.sql('date(created_at)')
     end
 
-    #
+    #ルミネのページをスクレイピング
     def self.get_lumine(link)
         lumine = Mechanize.new
         page = lumine.get(lumine_url)

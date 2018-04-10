@@ -8,6 +8,18 @@ class EventsController < ApplicationController
         # ストロングパラメーターを使用
          @event = Event.new(event_params)
 
+        # イベントが登録・編集されたら、変更履歴テーブルを更新
+        event = Event.find_by(params[:event_id])
+        event_change_history = event_change_histroies.build(event_id: event.id)
+
+        #ユーザーがログインしていたら、ユーザーIDを変更履歴に保存
+        logged_in?
+
+        # ユーザーのipアドレスを保存
+         event_change_histories.user_ip = request.remote_ip
+
+        event_change_history.save
+
         # エラーチェック＆DB保存→詳細画面へリダイレクト
         if @event.save
             redirect_to "/events/#{@event.id}" , notice: 'ありがとうございます！ライブ登録が完了しました！'
@@ -18,16 +30,12 @@ class EventsController < ApplicationController
     end
 
     def index
-        #search_options = {
-        #  live_date_at: params[:live_date_at]
-        #  live_name_or_remarks_cont: params[:live_name_or_remarks_cont]
-        #}
+        #今日と明日の日付を取得
         require 'date'
         @today = Date.today
         @tomorrow = @today + 1
 
         @q = Event.ransack(params[:q])
-        #@students = @q.result(distinct: true)
     	@events = Event.page(params[:page]).reverse_order
     end
 
@@ -50,19 +58,19 @@ class EventsController < ApplicationController
     end
 
     def show
-    	@event = Event.find(params[:id])
+    	@event = Event.find_by(params[:id])
     end
 
     def edit
-    	@event = Event.find(params[:id])
+    	@event = Event.find_by(params[:id])
     end
 
     def update
-    	@event = Event.find(params[:id])
-        # ユーザーIDを取得
-        if user_signed_in?
-         @event.event_change_histories.user_id = current_user.user_id
-        end
+    	@event = Event.find_by(params[:id])
+
+        #ユーザーがログインしていたら、ユーザーIDを変更履歴に保存
+        logged_in?
+
         # ユーザーのipアドレスを取得
          @event.event_change_histories.user_ip = request.remote_ip
 
@@ -71,7 +79,7 @@ class EventsController < ApplicationController
     end
 
     def destroy
-		@event = Event.find(params[:id])
+		@event = Event.find_by(params[:id])
         @event.destroy
         redirect_to events_path
     end

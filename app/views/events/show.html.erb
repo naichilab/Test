@@ -5,8 +5,8 @@
       <h3 class="post-card-title"><%= @event.title %></h3>
       <div class="post-card-text"><p><%= @event.description %></p>
       <span><%= @event.id %></span>
-        <span><%= @event.date %></span>
-        <span><%= @event.start %></span>
+        <%= event.date.strftime('%Y年%m月%d日') %></span>
+        <span><%= event.start.strftime('%H:%M') %>
         <span><%= @event.tel %></span>
       <span><%= @event.email %></span>
       <%= attachment_image_tag @event, :image, :fill, 100, 100, format: 'jpeg' %>

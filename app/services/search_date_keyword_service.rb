@@ -6,6 +6,6 @@ class SearchDateKeywordService
     end
 
     def execute
-        Event.where(live_date: (date_param), live_name: (keyword_param)).or(Event.where(live_date: (date_param), live_remarks: (keyword_param)))
+        Event.where(date: (date_param), name: (keyword_param)).or(Event.where(date: (date_param), description: (keyword_param)))
     end
 end
