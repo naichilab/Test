@@ -1,6 +1,21 @@
     日付から探す<br>
-    <span><%= link_to '今日', search_path(@today) %></span>
-    <span><%= link_to '明日', search_path(@tomorrow) %></span>
-    <span><%= link_to '次の土曜', search_path(@next_sat) %></span>
-    <span><%= link_to '次の日曜', search_path(@next_sun) %></span><br>
+    <span><%= link_to '今日', { :controller => :events, :action => :search, :id => 'date', :value => 'today'} %></span>
+    <span><%= link_to '明日', search_path(:date => 'tomorrow') %></span>
+    <span><%= link_to '次の土曜', search_path(:date => 'next_sat') %></span>
+    <span><%= link_to '次の日曜', search_path(:date => 'next_sun') %></span><br>
+    <span><%= form_for(@event) do |f| %>
+            <%= f.datetime_select :datetime %>
+            <%= f.submit '検索' %>
+       	  <%= end %></span>
     キーワードで探す<br>
+    <%= form_for(@event) do |f| %>
+            <%= f.text_field :datetime %>
+            <%= f.submit '検索' %>
+    <%= end %>
+
+	<%= form_tag("/search", method: "get") do %>
+	  <%= label_tag(:q, "Search for:") %>
+	  <%= text_field_tag(:q) %>
+	  <%= submit_tag("Search") %>
+	<% end %>
+</span>

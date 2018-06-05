@@ -9,13 +9,16 @@ class EventsController < ApplicationController
          @event = Event.new(event_params)
 
         # ipアドレスを取得
-         remote_ip = request.remote_ip
+         @remote_ip = request.remote_ip
+
+        # ログインユーザーを取得
+         @user_id = current_user.id
 
         # エラーチェック＆DB保存→詳細画面へリダイレクト
         if @event.save
             # イベントが登録されたら、変更履歴テーブルを更新
-            event = Event.find_by(params[:event_id])
-            UpdateEventChangeHistoryService.new(params[:event_id],remote_ip).execute
+            @event_id = @event.id
+            UpdateEventChangeHistoryService.new(@event.id,@remote_ip,@user_id).execute
 
             redirect_to "/events/#{@event.id}" , notice: 'ありがとうございます！ライブ登録が完了しました！'
         else
@@ -30,19 +33,12 @@ class EventsController < ApplicationController
     end
 
     def search
-        #binding.pry
+        @date = params[:value]
 
-        #今日のライブ情報を表示
-        return @events = SearchTodayService.new().execute if params[:today].present?
+        binding.pry
 
-        #明日のライブ情報を表示
-        return @events = SearchTomorrowService.new().execute if params[:tomorrow].present?
-
-        #次の土曜日のライブ情報を表示
-        return @events = SearchNextSatService.new().execute if params[:next_sat].present?
-
-        #次の日曜日のライブ情報を表示
-        return @events = SearchNextSunService.new().execute if params[:next_sun].present?
+        #ライブ情報を日付で検索
+        return @events = SearchDatetimeService.new(@date).execute if @date.present?
 
         #日付もしくはキーワードで検索
         return @events = SearchDatetimeKeywordService.new(params[:datetime],params[:keyword]).execute if params[:datetime].present? && params[:keyword].present?
@@ -55,16 +51,15 @@ class EventsController < ApplicationController
     end
 
     def show
-    	@event = Event.find_by(params[:id])
+    	@event = Event.find_by(params[:event_id])
     end
 
     def edit
-    	@event = Event.find_by(params[:id])
-
+    	@event = Event.find_by(params[:event_id])
     end
 
     def update
-    	@event = Event.find_by(params[:id])
+    	@event = Event.find_by(params[:event_id])
 
         # イベントが編集されたら、変更履歴テーブルを更新
         event = Event.find_by(params[:event_id])

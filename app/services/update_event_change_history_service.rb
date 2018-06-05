@@ -1,31 +1,33 @@
 class UpdateEventChangeHistoryService
 
-    def initialize(event_id_param,remote_ip_param)
+    def initialize(event_id_param,remote_ip_param,user_id_param)
+        # Set Event ID / イベントIDを取得
         @event_id = event_id_param
-        #event_change_history = EventChangeHistory.new(event_id: event_id_param)
 
-        # ユーザーのipアドレスを保存
-        #event_change_history.user_ip = remote_ip_param
+        # Set Remote IP / ユーザーのipアドレスを取得
         @remote_ip = remote_ip_param
 
-        #ユーザーがログインしていたら、ユーザーIDを変更履歴に保存
+        # Set User ID /ユーザーIDを取得
         #if logged_in?
-        #    event_change_history.user_id = current_user
+        @user_id = user_id_param
         #end
     end
 
     def execute
-        # ライブ情報の変更履歴を作成
-        event_change_history = EventChangeHistory.new(event_id: @event_id)
+        # Create Event Change History record / ライブ情報の変更履歴を作成
+        @event_change_history = EventChangeHistory.new(event_id: @event_id)
 
-        # ユーザーのipアドレスを保存
-        event_change_history.user_ip = @remote_ip_param
+        # Set Remote_ip in user_ip column /ユーザーのipアドレスを保存
+        @event_change_history.user_ip = @remote_ip
 
-        #ユーザーがログインしていたら、ユーザーIDを変更履歴に保存
+        # Set user_id in user_id column (if any) / ユーザーIDを保存
         #if logged_in?
-        #    event_change_history.user_id = current_user.id
+        @event_change_history.user_id = @user_id
         #end
 
-        event_change_history.save
+        # Save Event change history / ライブ情報の変更履歴を保存
+        @event_change_history.save
+
+        binding.pry
     end
 end

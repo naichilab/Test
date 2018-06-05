@@ -5,7 +5,7 @@
       <h3 class="post-card-title"><%= @event.title %></h3>
       <div class="post-card-text"><p><%= @event.description %></p>
       <span><%= @event.id %></span>
-        <%= event.datetime.strftime('%Y年%m月%d日 %H:%M') %></span>
+        <%= @event.datetime.strftime('%Y年%m月%d日 %H:%M') %></span>
         <span><%= @event.tel %></span>
       <span><%= @event.email %></span>
       <%= attachment_image_tag @event, :image, :fill, 100, 100, format: 'jpeg' %>
