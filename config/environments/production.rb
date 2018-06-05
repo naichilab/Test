@@ -88,4 +88,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # AngularJSを読み込むための設定
+  # Compress JavaScripts and CSS.
+  # config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = Uglifier.new(mangle: false)
+  # config.assets.css_compressor = :sass
 end

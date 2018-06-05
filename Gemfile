@@ -9,10 +9,9 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record in development
-gem 'sqlite3', groups: %w(test development), require: false
+# gem 'sqlite3', groups: %w(test development), require: false
 # Use Postgre as the database for Active Record in Production
-#gem 'pg'
-# , '< 1.0'
+gem 'pg', '< 1.0'
 # groups: %w(production), require: false
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
@@ -57,36 +56,49 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# 画像投稿用gem
-gem "refile", require: "refile/rails", github: 'manfe/refile'
-# 画像加工用（サイズ調整など）gem
-gem "refile-mini_magick"
+#投稿用gem
+  # 画像投稿用gem
+  gem "refile", require: "refile/rails", github: 'manfe/refile'
+  # 画像加工用（サイズ調整など）gem
+  gem "refile-mini_magick"
+
 # ユーザー認証
-gem 'devise'
-# Twitter連携
-gem 'omniauth'
-gem 'omniauth-twitter'
-# ページング
-gem 'kaminari'
-# bootstrap
-gem 'bootstrap-sass'
-gem 'jquery-rails'
-#Herokuデバッグ用
-gem 'rails_12factor'
-# タイル状のレイアウト
-gem 'masonry-rails'
+  # メールアドレス認証
+  gem 'devise'
+  # Twitter連携
+  gem 'omniauth'
+  gem 'omniauth-twitter'
+
+#デザイン関連
+  # ページング
+  gem 'kaminari'
+  # bootstrap
+  gem 'bootstrap-sass'
+  # タイル状のレイアウト
+  gem 'masonry-rails'
+
 # 検索用
-gem 'ransack'
-# WEBスクレイピング用
-gem 'mechanize'
-gem 'nokogiri'
-#エラーテスト用
-group :development, :test do
-  gem 'bullet'
-end
+  gem 'ransack'
+  # WEBスクレイピング用
+  gem 'mechanize'
+  gem 'nokogiri'
+
+# 開発用ツール
+  # テスト用
+    group :development, :test do
+      gem 'bullet'
+    end
+  # デバッグ用
+  gem 'pry'
+  # Herokuデバッグ用
+  gem 'rails_12factor'
+  # データ投入用
+  gem 'factory_bot'
+  # エラーメッセージを見やすく
+  gem 'better_errors'
+
 #時刻型のデータ用
 gem 'tod'
-#デバッグ用
-gem 'pry'
-#データ投入用
-gem 'factory_girl'
+#jQueryとturbolinksの追加
+gem 'jquery-rails'
+gem 'jquery-turbolinks'

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
+<!--Angular-Material-Datepickerのための設定-->
+<html ng-app="datepickerApp" ng-cloak>
+<!--end-->
   <head>
     <%= csrf_meta_tags %>
 
@@ -42,7 +45,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" media="screen" href="/assets/application-9f5dfd9252b67cb2b48b864e4ccf237bef79a0a4aa42563b0ba4853dca14e700.css" />
 
-    <!-- Google Analytics -->
+    <!--日付をカレンダ入力するための設定-->
+      <!--Material Datepicker用のCSS-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Google Font "Roboto"のインストール-->
+      <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <!-- Google Analytics
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -50,7 +59,7 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-106762099-1', 'auto');
       ga('send', 'pageview');
-    </script>
+    </script> -->
   </head>
 
   <body>

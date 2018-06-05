@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
   #ライブ情報検索
   get 'search', to: 'events#search'
-  get 'today', to: 'events#today'
 
   #Twitterログイン認証
    get 'auth/:provider/callback', to: 'sessions#create'

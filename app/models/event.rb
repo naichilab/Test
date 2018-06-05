@@ -20,7 +20,7 @@ class Event < ApplicationRecord
     accepts_nested_attributes_for :performers
 
     #存在チェック
-    validates :date, presence: true
+    validates :datetime, presence: true
     validates :title, presence: true
 
     #　参加するになってるかチェック
@@ -36,6 +36,11 @@ class Event < ApplicationRecord
     # リンクの件数をチェック
     def how_many_urls?(event)
       links.where(event_id: event.id).count
+    end
+
+    def user_signed_in?
+         # Returns true if the user is logged in, false otherwise.
+         !current_user.nil?
     end
 
     def self.lumine_urls

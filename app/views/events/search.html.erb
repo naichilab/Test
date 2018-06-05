@@ -1,15 +1,18 @@
 <br><br><br><br>
+<%= render 'search_error' if @events.count == 0 %>
+<%= render 'search_error' if @events.count == 0 %>
+<%= render 'search_error' if @events.count == 0 %>
+
 <h1>ライブ一覧</h1>
  <% @events.each do |event| %>
    <article>
     <div class="post-card-wrap">
-      <h3 class="post-card-title"><%= link_to event.live_name, event_path(event.id) %></h3>
-      <div class="post-card-text"><p><%= event.live_remarks %></p>
+      <h3 class="post-card-title"><%= link_to event.title, event_path(event.id) %></h3>
+      <div class="post-card-text"><p><%= event.description %></p>
 		 	<span><%= event.id %></span>
-		    <span><%= event.live_date %></span>
-		    <span><%= event.live_start %></span>
-		    <span><%= event.link_1 %></span>
-		 	<span><%= event.live_email %></span>
+		    <span><%= event.datetime %></span>
+		    <span><%= event.tel %></span>
+		 	<span><%= event.email %></span>
 		 	<span><%= event.uid %></span>
 		 	<span><%= event.ip %></span>
 			<%= attachment_image_tag event, :image, :fill, 100, 100, format: 'jpeg' %>

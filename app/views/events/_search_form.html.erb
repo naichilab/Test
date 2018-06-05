@@ -1,5 +1,6 @@
     日付から探す<br>
-    <span><%= link_to '今日',search_path(date: 'today') %></span>
-    <span><%= link_to '明日', search_path(date: 'tomorrow') %></span>
-    <span><%= link_to '次の土曜', search_path(date: 'next_sat') %></span>
-    <span><%= link_to '次の日曜', search_path(date: 'next_sun') %></span><br>
+    <span><%= link_to '今日', search_path(@today) %></span>
+    <span><%= link_to '明日', search_path(@tomorrow) %></span>
+    <span><%= link_to '次の土曜', search_path(@next_sat) %></span>
+    <span><%= link_to '次の日曜', search_path(@next_sun) %></span><br>
+    キーワードで探す<br>

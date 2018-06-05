@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410023909) do
+ActiveRecord::Schema.define(version: 20180604101823) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "category"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20180410023909) do
   end
 
   create_table "event_categories", force: :cascade do |t|
-    t.integer "event_id"
+    t.bigint "event_id"
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,10 +63,9 @@ ActiveRecord::Schema.define(version: 20180410023909) do
     t.string "image_id"
     t.string "title"
     t.string "description"
-    t.date "date"
-    t.time "start"
     t.string "tel"
     t.string "email"
+    t.datetime "datetime"
   end
 
   create_table "links", force: :cascade do |t|
@@ -126,4 +128,5 @@ ActiveRecord::Schema.define(version: 20180410023909) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "event_categories", "events"
 end

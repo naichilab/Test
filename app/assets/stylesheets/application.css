@@ -50,7 +50,10 @@ h1 {
     color: #1d2a47;
 }
 
-
+.center{
+  width: 800px;
+  margin-right; 0 auto;
+}
 
 .twitter-button{
     font-size: 13px;
@@ -2581,7 +2584,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background-image: url("main-visual2.jpg");
+    background-image: url("main-visual3.jpg");
     position: relative;
     color: #fff;
     padding: 32px 16px 40px

@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   #  devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   #end
 
-  private
+  #private
   def set_current_user
     return unless session[:user_id]
     @current_user = User.find_by(id: session[:user_id])
