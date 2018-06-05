@@ -33,7 +33,7 @@ class EventsController < ApplicationController
     end
 
     def search
-        @date = params[:value]
+        @date = params[:q]
 
         binding.pry
 
