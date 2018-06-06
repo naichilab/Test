@@ -29,7 +29,7 @@
             </div>
 
             <h4>開催日時</h4>
-            <%= f.datetime_select :datetime %>
+            <%= f.datetime_select :datetime %><br>
 
             <%= f.text_field :title,:placeholder => "タイトル" %><br>
             <%= f.text_area :description,:placeholder => "内容" %><br>
@@ -41,7 +41,7 @@
             <% end %>
 
             <%= f.fields_for :event_performers do |performers_form| %>
-                <%= performers_form.text_field :performer,:placeholder => "出演者"  %><br>
+                <%= performers_form.text_area :performer,:placeholder => "出演者"  %><br>
             <% end %>
 
             <%= f.fields_for :event_categories do |categories_form| %>

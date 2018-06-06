@@ -1,35 +1,9 @@
 <div class="profile-container"><br><Br><br>
     <h3 class="profile-name"><%= @user.name %></h3>
-    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+    <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "https://pbs.twimg.com/profile_images/958803950391541760/ABdXMZLE.jpg" %>
 	<% if @user.id == current_user.id %>
         <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
     <% end %>
 </div>
 
-<section class="sct-color-1 slice">
-  <div class="container-fluid masonry-container">
-    <div class="row">
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-		 <h1>ライブ一覧</h1>
-		 <% @user.events.each do |event| %>
-		    <p></p>
-		    <span><%= event.live_date %></span>
-		    <span><%= event.live_start %></span>
-		    <span><%= link_to event.live_name, event_path(event.id) %></span>
-		    <span><%= event.live_remarks %></span>
-		    <span><%= event.link_1 %></span>
-		 	<span><%= event.live_email %></span>
-			<%= attachment_image_tag event, :image, :fill, 100, 100, format: 'jpeg' %>
-			<%= link_to "編集", edit_event_path(event.id) %>
-			<!--もし今のユーザーがライブを投稿したユーザーと一致したら削除ボタンを表示-->
-			<% if @event.user_id == current_user.id %>
-				<%= link_to "削除", destroy_event_path(event.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-			<% end %>
-			<%= paginate @events, class: "pagenate" %>
-		<% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<%= render :partial => "events/event_list", locals: { events: @events } %>

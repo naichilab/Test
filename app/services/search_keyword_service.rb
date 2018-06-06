@@ -1,10 +1,12 @@
 class SearchKeywordService
 
-    def initialize(date_param,keyword_param)
+    def initialize(keyword_param)
         @keyword = keyword_param
     end
 
     def execute
-        Event.search(@keyword).result
+        @events = Event.where(‘title = ? or description = ?‘, @keyword, @keyword)
+
+        @events
     end
 end

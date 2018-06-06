@@ -10,18 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180604101823) do
+ActiveRecord::Schema.define(version: 20180606164746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "categories", force: :cascade do |t|
-    t.string "category"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "event_id"
-    t.index ["event_id"], name: "index_categories_on_event_id"
-  end
 
   create_table "event_categories", force: :cascade do |t|
     t.bigint "event_id"
@@ -66,14 +58,7 @@ ActiveRecord::Schema.define(version: 20180604101823) do
     t.string "tel"
     t.string "email"
     t.datetime "datetime"
-  end
-
-  create_table "links", force: :cascade do |t|
-    t.integer "event_id"
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_links_on_event_id"
+    t.string "place"
   end
 
   create_table "participates", force: :cascade do |t|
@@ -92,14 +77,6 @@ ActiveRecord::Schema.define(version: 20180604101823) do
     t.integer "user_id"
     t.index ["event_id"], name: "index_pendings_on_event_id"
     t.index ["user_id"], name: "index_pendings_on_user_id"
-  end
-
-  create_table "performers", force: :cascade do |t|
-    t.string "performer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "event_id"
-    t.index ["event_id"], name: "index_performers_on_event_id"
   end
 
   create_table "users", force: :cascade do |t|

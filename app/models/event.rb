@@ -9,15 +9,25 @@ class Event < ApplicationRecord
 
   #複数のリンクを持てる
     has_many :event_links, dependent: :destroy
-    accepts_nested_attributes_for :event_links
+    accepts_nested_attributes_for :event_links, allow_destroy: true
+  # 子モデルの要素にもアクセスできるようにする
+    #attr_accessible :event_links_attributes
 
   #複数の変更履歴を持てる
     has_many :event_change_histories, dependent: :destroy
-    accepts_nested_attributes_for :event_change_histories
+    accepts_nested_attributes_for :event_change_histories, allow_destroy: true
+  # 子モデルの要素にもアクセスできるようにする
+    #attr_accessible :event_change_histories_attributes
 
   #複数の出演者を持てる
-    has_many :performers, dependent: :destroy
-    accepts_nested_attributes_for :performers
+    has_many :event_performers, dependent: :destroy
+    accepts_nested_attributes_for :event_performers, allow_destroy: true
+  # 子モデルの要素にもアクセスできるようにする
+    #attr_accessible :event_performers_attributes
+
+  #複数のカテゴリを持てる
+    has_many :event_categories, dependent: :destroy
+    accepts_nested_attributes_for :event_categories, allow_destroy: true
 
     #存在チェック
     validates :datetime, presence: true
@@ -35,7 +45,7 @@ class Event < ApplicationRecord
 
     # リンクの件数をチェック
     def how_many_urls?(event)
-      links.where(event_id: event.id).count
+      event_links.where(event_id: event.id).count
     end
 
     def user_signed_in?
@@ -63,7 +73,7 @@ class Event < ApplicationRecord
     end
 
     #日付検索
-    ransacker :live_date, type: :date do
+    ransacker :datetime, type: :date do
       Arel.sql('date(created_at)')
     end
 
@@ -81,8 +91,8 @@ class Event < ApplicationRecord
           else
             day = Event.last.day
           end
-          live_name = ele.search('li .schedule_con, .lastChild')[1].inner_text
-          live_start = ele.search('li .schedule_con, .lastChild')[0].inner_text
+          title = ele.search('li .schedule_con, .lastChild')[1].inner_text
+          description = ele.search('li .schedule_con, .lastChild')[0].inner_text
 
           place = '¥nルミネtheよしもと¥n'
           price = ele.search('li .schedule_con, .lastChild')[4].inner_text

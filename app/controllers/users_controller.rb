@@ -16,8 +16,15 @@ class UsersController < ApplicationController
 	end
 	def show
 	    @user = current_user
+
+	    #　ログインユーザーが登録したライブ一覧だけ表示
    		#@events = @user.events.page(params[:page])
-   		@events = @user.events
+   		# @events = @user.events
+	end
+
+	def profile
+        @user = current_user
+        redirect_to user_path(@user.uid)
 	end
 
 	private

@@ -28,6 +28,5 @@ class UpdateEventChangeHistoryService
         # Save Event change history / ライブ情報の変更履歴を保存
         @event_change_history.save
 
-        binding.pry
     end
 end

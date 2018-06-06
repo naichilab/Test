@@ -15,6 +15,10 @@
  */
 /* makepost参考 */
 /*! sanitize.css v5.0.0 | CC0 License | github.com/jonathantneal/sanitize.css */
+
+li{
+    list-style: none;
+}
 * , ::after, ::before {
     background-repeat: no-repeat;
     box-sizing: inherit
