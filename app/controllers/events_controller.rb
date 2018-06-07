@@ -1,28 +1,17 @@
 class EventsController < ApplicationController
 
 	def new
+    # イベントを登録
 		@event = Event.new
 
     # 出演者を登録
         @event.event_performers.build
-     #   @event.event_performers.size do
-     #     performer = EventPerformers.new
-     #     @event.event_performers << performer
-     #   end
 
     # リンクを登録
         @event.event_links.build
-     #   @event.event_links.size do
-     #     link = EventLinks.new
-     #     @event.event_links << link
-     #   end
 
     # カテゴリを登録
         @event.event_categories.build
-     #   @event.event_categories.size do
-     #     category = EventCategories.new
-     #     @event.event_categories << category
-     #   end
 
 	end
 
@@ -36,13 +25,13 @@ class EventsController < ApplicationController
         # ログインユーザーを取得
          @user_id = current_user.id
 
-        # エラーチェック＆DB保存→詳細画面へリダイレクト
+        # DB保存→詳細画面へリダイレクト
         if @event.save
             # イベントが登録されたら、変更履歴テーブルを更新
-            @event_id = @event.id
+            #@event_id = @event.id
             UpdateEventChangeHistoryService.new(@event.id,@remote_ip,@user_id).execute
 
-            redirect_to event_path(params[:event_id]) , notice: 'ありがとうございます！ライブ登録が完了しました！'
+            redirect_to event_path(@event.id), notice: 'ありがとうございます！ライブ登録が完了しました！'
         else
             flash.now[:error] = 'ライブ登録に失敗しました...。お手数ですが最初からやり直してください。'
             render :new
@@ -76,16 +65,17 @@ class EventsController < ApplicationController
     end
 
     def show
-    	@event = Event.find_by(params[:event_id])
+        binding.pry
+    	@event = Event.find_by(params.permit[:id])
     end
 
     def edit
-    	@event = Event.find_by(params[:event_id])
+    	@event = Event.find_by(params[:id])
     end
 
     def update
         # イベント情報を取得
-         @event = Event.find_by(params[:event_id])
+         @event = Event.find_by(params[:id])
 
         # ipアドレスを取得
          @remote_ip = request.remote_ip

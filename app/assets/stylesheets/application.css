@@ -16,6 +16,10 @@
 /* makepost参考 */
 /*! sanitize.css v5.0.0 | CC0 License | github.com/jonathantneal/sanitize.css */
 
+.header-nav{
+    margin-right: 0 auto;
+    padding:20px;
+}
 li{
     list-style: none;
 }
@@ -730,7 +734,8 @@ body {
 }
 
 .footer {
-    margin-bottom: 50px
+    margin-bottom: 50px;
+    background-color: #272727;
 }
 
 @media (min-width: 769px) {
